@@ -71,9 +71,9 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	for _, o := range obj {
+	for key, o := range obj {
 		//payload[0].Geo["city"]
-		fmt.Println(o.Geo["city"])
+		fmt.Println("City is:", o.Geo["city"], "KEY:", key)
 	}
 }
 
