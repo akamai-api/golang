@@ -46,7 +46,7 @@
   ## ReqHdr
   	// cookie
 
-	## RespHdr 
+  ## RespHdr 
 	// server
 	// contEnc
   
