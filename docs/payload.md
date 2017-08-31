@@ -1,6 +1,7 @@
 # Payload documentation
 
 ## CP
+ Cache plugin or Cache Purging! Still unclear
 
 ## Format
 
