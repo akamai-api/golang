@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+// AkamaiPayload is a Golang representation of the Cloudmonitor JSON datastructure
 type AkamaiPayload struct {
 	CP     string            `json:"cp"`
 	Format string            `json:"format"`
