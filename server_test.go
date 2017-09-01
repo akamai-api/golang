@@ -76,4 +76,7 @@ func TestValidPayload(t *testing.T) {
 	if payload.ID != "915cfea5570f824cc27112-a" {
 		t.Errorf("ID not correct in payload. Should be 915cfea5570f824cc27112-a, is %s", payload.ID)
 	}
+	if payload.Geo["country"] != "DE" {
+		t.Errorf("Country not correct in payload. Should be DE, is %s", payload.Geo["country"])
+	}
 }
