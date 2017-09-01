@@ -61,7 +61,6 @@ type AkamaiPayload struct {
 
 // CreateObject creates a list of AkamaiPayloads from a raw byte slice
 func CreateObject(jsonFile []byte) (_ []AkamaiPayload, err error) {
-
 	var arrayObject []AkamaiPayload
 	err = json.Unmarshal(jsonFile, &arrayObject)
 	return arrayObject, err
@@ -71,6 +70,9 @@ func CreateObject(jsonFile []byte) (_ []AkamaiPayload, err error) {
 func Handle(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "OK! I got you Bro! -> ")
 	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
 	obj, err := CreateObject(body)
 	if err != nil {
 		log.Fatal(err)
