@@ -65,7 +65,8 @@ func CreateObject(jsonFile []byte) (_ []AkamaiPayload, err error) {
 
 func Handle(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "OK! I got you Bro! -> ")
-	body, _ := ioutil.ReadAll(r.Body)
+	body, _ := JsonHandler(r.Body)
+	//body, _ := ioutil.ReadAll(r.Body)
 	obj, err := CreateObject(body)
 	if err != nil {
 		log.Fatal(err)
@@ -75,6 +76,11 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		//payload[0].Geo["city"]
 		fmt.Println("City is:", o.Geo["city"], "KEY:", key)
 	}
+}
+
+func JsonHandler(r io.Reader) (b []byte, err error) {
+	b, err = ioutil.ReadAll(r)
+	return
 }
 
 func main() {
