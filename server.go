@@ -14,47 +14,67 @@ type AkamaiPayload struct {
 	// Content Provider ID
 	CP string `json:"cp"`
 	// Defines the format of the payload (?)
-	Format string            `json:"format"`
-	Geo    map[string]string `json:"geo"`
-	// city
-	// country
-	// lat
-	// long
-	// region
-	ID      string            `json:"id"`
-	Message map[string]string `json:"message"`
-	// UA
-	// bytes
-	// cliIP
-	// fwdHost
-	// proto
-	// protoVer
-	// reqHost
-	// reqMethod
-	// reqPath
-	// reqPort
-	// respCT
-	// respLen
-	// status
-	NetPerf map[string]string `json:"netPerf"`
-	// asnum
-	// cacheStatus
-	// downloadTime
-	// edgeIP
-	// firstByte
-	// lastByte
-	// lastMileRTT
-	Network map[string]string `json:"network"`
-	// asnum
-	// edgeIP
-	// network
-	// networkType
-	ReqHdr map[string]string `json:"reqHdr"`
-	// cookie
+	Format  string        `json:"format"`
+	Geo     GeoStruct     `json:"geo"`
+	ID      string        `json:"id"`
+	Message MessageStruct `json:"message"`
+	NetPerf NetPerfStruct `json:"netPerf"`
+	Network NetworkStruct `json:"network"`
+	ReqHdr  ReqHdrStruct  `json:"reqHdr"`
 	RespHdr RespHdrStruct `json:"respHdr"`
 	Start   string        `json:"start"`
 	Type    string        `json:"type"`
 	Version string        `json:"version"`
+}
+
+// GeoStruct is used for storing the JSON subfields
+type GeoStruct struct {
+	City    string `json:"city"`
+	Country string `json:"country"`
+	Lat     string `json:"lat"`
+	Long    string `json:"long"`
+	Region  string `json:"region"`
+}
+
+// MessageStruct is used for storing the JSON subfields
+type MessageStruct struct {
+	UA        string `json:"UA"`
+	Bytes     string `json:"bytes"`
+	CliIP     string `json:"cliIP"`
+	FwdHost   string `json:"fwdHost"`
+	Proto     string `json:"proto"`
+	ProtoVer  string `json:"protoVer"`
+	ReqHost   string `json:"reqHost"`
+	ReqMethod string `json:"reqMethod"`
+	ReqPath   string `json:"reqPath"`
+	ReqPort   string `json:"reqPort"`
+	RespCT    string `json:"respCT"`
+	RespLen   string `json:"respLen"`
+	Status    string `json:"status"`
+}
+
+// NetPerfStruct is used for storing the JSON subfields
+type NetPerfStruct struct {
+	Asnum        string `json:"asnum"`
+	CacheStatus  string `json:"cacheStatus"`
+	DownloadTime string `json:"downloadTime"`
+	EdgeIP       string `json:"edgeIP"`
+	FirstByte    string `json:"firstByte"`
+	LastByte     string `json:"lastByte"`
+	LastMileRTT  string `json:"lastMileRTT"`
+}
+
+// NetworkStruct is used for storing the JSON subfields
+type NetworkStruct struct {
+	Asnum       string `json:"asnum"`
+	EdgeIP      string `json:"edgeIP"`
+	Network     string `json:"network"`
+	NetworkType string `json:"networkType"`
+}
+
+// ReqHdrStruct is used for storing the JSON subfields
+type ReqHdrStruct struct {
+	Cookie string `json:"cookie"`
 }
 
 // RespHdrStruct is used for storing the JSON subfields
