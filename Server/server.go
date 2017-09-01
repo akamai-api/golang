@@ -11,7 +11,9 @@ import (
 
 // AkamaiPayload is a Golang representation of the Cloudmonitor JSON datastructure
 type AkamaiPayload struct {
-	CP     string            `json:"cp"`
+	// Content Provider ID
+	CP string `json:"cp"`
+	// Defines the format of the payload (?)
 	Format string            `json:"format"`
 	Geo    map[string]string `json:"geo"`
 	// city
@@ -57,6 +59,7 @@ type AkamaiPayload struct {
 	Version string `json:"version"`
 }
 
+// CreateObject creates a list of AkamaiPayloads from a raw byte slice
 func CreateObject(jsonFile []byte) (_ []AkamaiPayload, err error) {
 
 	var arrayObject []AkamaiPayload
@@ -64,10 +67,10 @@ func CreateObject(jsonFile []byte) (_ []AkamaiPayload, err error) {
 	return arrayObject, err
 }
 
+// Handle parses the incoming request data
 func Handle(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "OK! I got you Bro! -> ")
-	body, _ := JsonHandler(r.Body)
-	//body, _ := ioutil.ReadAll(r.Body)
+	body, err := ioutil.ReadAll(r.Body)
 	obj, err := CreateObject(body)
 	if err != nil {
 		log.Fatal(err)
@@ -77,11 +80,6 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		//payload[0].Geo["city"]
 		fmt.Println("City is:", o.Geo["city"], "KEY:", key)
 	}
-}
-
-func JsonHandler(r io.Reader) (b []byte, err error) {
-	b, err = ioutil.ReadAll(r)
-	return
 }
 
 func main() {
