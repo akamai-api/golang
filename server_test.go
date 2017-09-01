@@ -7,7 +7,7 @@ import (
 // TestValidPayload tests if we can create a proper object from
 // a valid JSON payload.
 func TestValidPayload(t *testing.T) {
-	json := `{
+	json := `[{
 		"message" : {
 		   "reqHost" : "www.example.com",
 		   "respLen" : "276248",
@@ -58,16 +58,22 @@ func TestValidPayload(t *testing.T) {
 		"reqHdr" : {
 		   "cookie" : "drbanan%3d1"
 		}
-	 }`
+	 }]`
 
-	_, err := CreateObject([]byte(json))
+	payloads, err := CreateObjects([]byte(json))
 	if err != nil {
 		t.Errorf("Error while trying to decode valid JSON payload: %s", err)
 	}
 
-	// startedWith := strings.HasPrefix(string(obj), "[")
-	// endsWith := strings.HasSuffix("suffix", "fix")
-	// if isStarted == false {
-	// 	t.Errorf("Your json file is incorrect")
-	// }
+	if len(payloads) != 1 {
+		t.Errorf("Unexpected number of payloads in JSON: Should be 1, is %d", len(payloads))
+	}
+
+	payload := payloads[0]
+	if payload.CP != "123456" {
+		t.Errorf("CP not correct in payload. Should be 123456, is %s", payload.CP)
+	}
+	if payload.ID != "915cfea5570f824cc27112-a" {
+		t.Errorf("ID not correct in payload. Should be 915cfea5570f824cc27112-a, is %s", payload.ID)
+	}
 }

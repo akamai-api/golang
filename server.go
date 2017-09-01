@@ -59,8 +59,8 @@ type AkamaiPayload struct {
 	Version string `json:"version"`
 }
 
-// CreateObject creates a list of AkamaiPayloads from a raw byte slice
-func CreateObject(jsonFile []byte) (_ []AkamaiPayload, err error) {
+// CreateObjects creates a list of AkamaiPayloads from a raw byte slice
+func CreateObjects(jsonFile []byte) (_ []AkamaiPayload, err error) {
 	var arrayObject []AkamaiPayload
 	err = json.Unmarshal(jsonFile, &arrayObject)
 	return arrayObject, err
@@ -73,7 +73,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	obj, err := CreateObject(body)
+	obj, err := CreateObjects(body)
 	if err != nil {
 		log.Fatal(err)
 	}
