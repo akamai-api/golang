@@ -51,12 +51,16 @@ type AkamaiPayload struct {
 	// networkType
 	ReqHdr map[string]string `json:"reqHdr"`
 	// cookie
-	RespHdr map[string]string `json:"respHdr"`
-	// server
-	// contEnc
-	Start   string `json:"start"`
-	Type    string `json:"type"`
-	Version string `json:"version"`
+	RespHdr RespHdrStruct `json:"respHdr"`
+	Start   string        `json:"start"`
+	Type    string        `json:"type"`
+	Version string        `json:"version"`
+}
+
+// RespHdrStruct is used for storing the JSON subfields
+type RespHdrStruct struct {
+	Server  string `json:"server"`
+	ContEnc string `json:"contEnc"`
 }
 
 // CreateObjects creates a list of AkamaiPayloads from a raw byte slice
@@ -80,7 +84,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 	for key, o := range obj {
 		//payload[0].Geo["city"]
-		fmt.Println("City is:", o.Geo["city"], "KEY:", key)
+		fmt.Println("City is:", o.RespHdr.Server, "KEY:", key)
 	}
 }
 
