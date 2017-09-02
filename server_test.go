@@ -2,6 +2,7 @@ package main
 
 import (
 	"testing"
+	"io/ioutil"
 )
 
 // TestValidPayload tests if we can create a proper object from
@@ -79,4 +80,26 @@ func TestValidPayload(t *testing.T) {
 	if payload.Geo.Country != "DE" {
 		t.Errorf("Country not correct in payload. Should be DE, is %s", payload.Geo.Country)
 	}
+}
+
+// TestValidPayload tests if we create a proper object from
+// a valid JSON payload.
+func TestMultiplePayloads(t *testing.T) {
+	dat, err:= ioutil.ReadFile("tests/payload.json")
+	payloads, err := CreateObjects([]byte(dat))
+	if err != nil {
+		t.Errorf("Error while trying to decode valid JSON payload: %s", err)
+	}
+	// test custom number of payloads in JSON file
+	if len(payloads) != 27 {
+		t.Errorf("Unexpected number of payloads in JSON: Should be 7, is %d", len(payloads))
+	}
+
+	for i := 0; i < len(payloads); i++ {
+		if payloads[i].CP != "123456" {
+			t.Errorf("CP not correct in payload. Should be 123456, is %s", payloads[i].CP)
+		}
+	}
+
+	// TODO test other fields
 }
