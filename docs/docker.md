@@ -1,7 +1,6 @@
-## Introduction
-```
+# Docker configuration
 In this documentation we illustrate how to create a web-host running on the docker.
-```
+
 
 ## Run
 ```
