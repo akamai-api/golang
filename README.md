@@ -1,5 +1,7 @@
-# golang
-An idiomatic Golang client for the Akamai API
+# An idiomatic Golang client for the Akamai API
+
+[![Build Status](https://travis-ci.org/akamai-api/golang.svg?branch=master)](https://travis-ci.org/akamai-api/golang)
+
 
 ### Terminology
 
