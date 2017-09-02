@@ -82,8 +82,7 @@ func TestValidPayload(t *testing.T) {
 	}
 }
 
-// TestValidPayload tests if we create a proper object from
-// a valid JSON payload.
+// TestMultiplePayloads tests if a correct number of payload objects are created.
 func TestMultiplePayloads(t *testing.T) {
 	dat, err:= ioutil.ReadFile("tests/payload.json")
 	payloads, err := CreateObjects([]byte(dat))
