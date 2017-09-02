@@ -5,7 +5,7 @@ In this documentation we illustrate how to create a web-host running on the dock
 
 ## Run
 ```
-go run main.go
+go run server.go
 ```
 
 ## Build
