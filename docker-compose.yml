@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  server-service:
+   build: .
+   volumes:
+    - .:/data
+   ports:
+    - 9143:80
+
+  influxDB:
+   image: influxdb:1.3
+   #volumes:   (maybe mount influxdb library here)
+   # - ./website:/var/www/html
+   ports:
+     - 5000:80
+  
+  grafana:
+   image: grafana/grafana
+   ports:
+     - 3000:80
