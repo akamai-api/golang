@@ -7,6 +7,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
+
+	"github.com/influxdata/influxdb/client/v2"
 )
 
 // AkamaiPayload is a Golang representation of the Cloudmonitor JSON datastructure
@@ -101,14 +104,49 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	c, err := client.NewHTTPClient(client.HTTPConfig{
+		Addr: "http://localhost:8086",
+	})
 	for key, o := range obj {
 		//payload[0].Geo["city"]
 		fmt.Println("City is:", o.RespHdr.Server, "KEY:", key)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Create a new point batch
+		bp, err := client.NewBatchPoints(client.BatchPointsConfig{
+			Database: "myfirstdatabase",
+			//Precision: "s",
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Create a point and add to batch
+		tags := map[string]string{"city": o.Geo.City}
+		fields := map[string]interface{}{
+			"country": o.Geo.Country,
+			"lat":     o.Geo.Lat,
+			"long":    o.Geo.Long,
+		}
+
+		pt, err := client.NewPoint("cp", tags, fields, time.Now().Add(time.Duration(-key-1)))
+		if err != nil {
+			log.Fatal(err)
+		}
+		bp.AddPoint(pt)
+
+		// Write the batch
+		if err := c.Write(bp); err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
 func main() {
+
 	http.HandleFunc("/", Handle)
 	http.ListenAndServe(":9143", nil)
 }

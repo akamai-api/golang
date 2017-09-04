@@ -1,28 +1,22 @@
 ### Basic setup with docker-compose
 
-Docker-compose can be used to setup an small stack with prometheus/grafana/haproxy/cloudmonitor_exporter.
 
 ## Instructions
 * Make sure docker engine is installed ([instructions](https://docs.docker.com/engine/installation/))
 * Make sure docker compose is installed ([instructions](https://docs.docker.com/compose/install/))
 * Clone repository
 
-`git clone https://github.com/ExpressenAB/cloudmonitor_exporter.git`
-* Create self-signed certificate by running setup.sh
-```
-> cd cloudmonitor_exporter/setup
-> ./setup.sh
-This will generate a self-signed certificate to use with cloudmonitor_exporter
-Enter companyname for certificate:
-......
-```
 * Start containers by running `docker-compose up`
 
 Now we have 4 docker containers running with:
-* cloudmonitor_exporter listening on :9143
-* haproxy listening on 443 with self-signed certificate for ssl termination
-* prometheus scraping localhost:9143
-* grafana using prometheus datasource from localhost:9090
+* run arbitratry commands in your services using `docker-compose exec <service>` e.g 
+```
+docker-compose exec influxDB bash
+```
+* Recreate containers even if their configuration and image haven't changed using 
+```
+docker-compose up --force-recreate
+```
 
 ## Test stack
 
