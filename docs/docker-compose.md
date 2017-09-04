@@ -9,8 +9,14 @@
 * Start containers by running `docker-compose up`
 
 Now we have 4 docker containers running with:
-* run arbitratry commands in your services using `docker-compose exec <service>` e.g `docker-compose exec influxDB bash`
-* Recreate containers even if their configuration and image haven't changed using `docker-compose up --force-recreate`
+* run arbitratry commands in your services using `docker-compose exec <service>` e.g 
+```
+docker-compose exec influxDB bash
+```
+* Recreate containers even if their configuration and image haven't changed using 
+```
+docker-compose up --force-recreate
+```
 
 ## Test stack
 
