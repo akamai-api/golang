@@ -3,6 +3,7 @@ version: "3"
 services:
   server:
    build: .
+   image: server:latest
    volumes:
     - .:/app
    ports:
