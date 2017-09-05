@@ -143,6 +143,8 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		lat, err := strconv.ParseFloat(o.Geo.Lat, 64)
 		long, err := strconv.ParseFloat(o.Geo.Long, 64)
 		downloadTime, err := strconv.ParseInt(o.NetPerf.DownloadTime, 10, 32)
+		status, err := strconv.ParseInt(o.Message.Status, 10, 32)
+
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -150,6 +152,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			"lat":          lat,
 			"long":         long,
 			"downloadtime": downloadTime,
+			"status":       status,
 		}
 
 		pt, err := client.NewPoint("measurement", tags, fields, time.Now())
