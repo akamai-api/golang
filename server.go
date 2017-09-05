@@ -125,11 +125,13 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Create a point and add to batch
-		tags := map[string]string{"city": o.Geo.City}
-		fields := map[string]interface{}{
+		tags := map[string]string{
 			"country": o.Geo.Country,
-			"lat":     o.Geo.Lat,
-			"long":    o.Geo.Long,
+		}
+		fields := map[string]interface{}{
+
+			"lat":  o.Geo.Lat,
+			"long": o.Geo.Long,
 		}
 
 		pt, err := client.NewPoint("cp2", tags, fields, time.Now())
