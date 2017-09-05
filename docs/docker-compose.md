@@ -32,3 +32,7 @@ Now visit local [grafana](http://localhost:3000) instance and login with admin/a
  ```
  docker run -it server:latest bash
  ```
+## How to build a compooser again with building the containers
+```
+docker-compose up --force-recreate --build
+```
