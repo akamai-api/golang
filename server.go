@@ -18,17 +18,18 @@ type AkamaiPayload struct {
 	// Content Provider ID
 	CP string `json:"cp"`
 	// Defines the format of the payload (?)
-	Format  string        `json:"format"`
+	Format  string `json:"format"`
+	ID      string `json:"id"`
+	Start   string `json:"start"`
+	Type    string `json:"type"`
+	Version string `json:"version"`
+
 	Geo     GeoStruct     `json:"geo"`
-	ID      string        `json:"id"`
 	Message MessageStruct `json:"message"`
 	NetPerf NetPerfStruct `json:"netPerf"`
 	Network NetworkStruct `json:"network"`
 	ReqHdr  ReqHdrStruct  `json:"reqHdr"`
 	RespHdr RespHdrStruct `json:"respHdr"`
-	Start   string        `json:"start"`
-	Type    string        `json:"type"`
-	Version string        `json:"version"`
 }
 
 // GeoStruct is used for storing the JSON subfields
@@ -117,7 +118,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	for key, o := range obj {
 		//payload[0].Geo["city"]
 		fmt.Println("Server is:", o.RespHdr.Server, "KEY:", key)
@@ -128,8 +129,11 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 		// Create a point and add to batch
 		tags := map[string]string{
+			"cp":      o.CP,
+			"format":  o.Format,
 			"city":    o.Geo.City,
 			"country": o.Geo.Country,
+			o.Geo.Region,
 		}
 		lat, err := strconv.ParseFloat(o.Geo.Lat, 64)
 		long, err := strconv.ParseFloat(o.Geo.Long, 64)
