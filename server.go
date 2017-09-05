@@ -105,7 +105,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	c, err := client.NewHTTPClient(client.HTTPConfig{
-		Addr: "http://localhost:8086",
+		Addr: "http://influxDB:8086",
 	})
 	for key, o := range obj {
 		//payload[0].Geo["city"]
