@@ -1,14 +1,15 @@
 version: "3"
 
 services:
-  server:
+  server: 
    build: .
+   image: server:latest
    volumes:
     - .:/app
    ports:
     - 9143:9143
 
-  influxDB:
+  influxDB: 
    image: influxdb:1.3
    entrypoint: bash
    command: influxdb/boot-up.sh
