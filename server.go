@@ -130,15 +130,12 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 		// Create a point and add to batch
 		tags := map[string]string{
-			"cp":      o.CP,
-			"format":  o.Format,
-			"city":    o.Geo.City,
-			"country": o.Geo.Country,
-<<<<<<< HEAD
-			o.Geo.Region,
-=======
-			"status":  o.Message.Status,
->>>>>>> e85d1d63bb264577ac694966a49323b5a670b421
+			"cp":          o.CP,
+			"format":      o.Format,
+			"city":        o.Geo.City,
+			"country":     o.Geo.Country,
+			"status":      o.Message.Status,
+			"cacheStatus": o.NetPerf.CacheStatus,
 		}
 		lat, err := strconv.ParseFloat(o.Geo.Lat, 64)
 		long, err := strconv.ParseFloat(o.Geo.Long, 64)
