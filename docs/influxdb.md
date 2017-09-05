@@ -24,3 +24,16 @@ influxd -config /usr/local/etc/influxdb.conf
 influx: in the command-line
 ```
 
+## DATABASE 
+```
+Show all the databases inside of the influxdb instance
+    SHOW DATABASES
+
+For using the database run:
+    USE DATABASE <Nome-Of-Database>
+ 
+SELECT * FROM cp
+
+Show the fields of the database:
+    SHOW FIELDS KEY    
+```

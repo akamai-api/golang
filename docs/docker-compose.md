@@ -4,11 +4,10 @@
 ## Instructions
 * Make sure docker engine is installed ([instructions](https://docs.docker.com/engine/installation/))
 * Make sure docker compose is installed ([instructions](https://docs.docker.com/compose/install/))
-* Clone repository
 
 * Start containers by running `docker-compose up`
 
-Now we have 4 docker containers running with:
+Now we have 3 docker containers running with:
 * run arbitratry commands in your services using `docker-compose exec <service>` e.g 
 ```
 docker-compose exec influxDB bash
@@ -27,3 +26,13 @@ cd tests
 ```
 
 Now visit local [grafana](http://localhost:3000) instance and login with admin/admin
+
+
+## How to access to the bash script in certain contaner
+ ```
+ docker run -it server:latest bash
+ ```
+## How to build a compooser again with building the containers at the same time
+```
+docker-compose up --force-recreate --build
+```

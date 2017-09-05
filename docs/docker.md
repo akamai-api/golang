@@ -32,3 +32,7 @@ docker run --publish 9143:9143 -t  go-server
 ```
 docker ps
 ```
+## How to remove an image in the Docker
+```
+https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
+```
