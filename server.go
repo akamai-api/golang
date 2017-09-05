@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/influxdata/influxdb/client/v2"
@@ -125,14 +126,21 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Create a point and add to batch
-		tags := map[string]string{"city": o.Geo.City}
-		fields := map[string]interface{}{
+		tags := map[string]string{
+			"city":    o.Geo.City,
 			"country": o.Geo.Country,
-			"lat":     o.Geo.Lat,
-			"long":    o.Geo.Long,
+		}
+		lat, err := strconv.ParseFloat(o.Geo.Lat, 64)
+		long, err := strconv.ParseFloat(o.Geo.Long, 64)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fields := map[string]interface{}{
+			"lat":  lat,
+			"long": long,
 		}
 
-		pt, err := client.NewPoint("cp", tags, fields, time.Now().Add(time.Duration(-key-1)))
+		pt, err := client.NewPoint("cp", tags, fields, time.Now())
 		if err != nil {
 			log.Fatal(err)
 		}
