@@ -126,6 +126,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
+		status, err := strconv.ParseInt(o.Message.Status, 10, 32)
 
 		// Create a point and add to batch
 		tags := map[string]string{
@@ -133,7 +134,11 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			"format":  o.Format,
 			"city":    o.Geo.City,
 			"country": o.Geo.Country,
+<<<<<<< HEAD
 			o.Geo.Region,
+=======
+			"status":  o.Message.Status,
+>>>>>>> e85d1d63bb264577ac694966a49323b5a670b421
 		}
 		lat, err := strconv.ParseFloat(o.Geo.Lat, 64)
 		long, err := strconv.ParseFloat(o.Geo.Long, 64)
@@ -141,8 +146,9 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 		fields := map[string]interface{}{
-			"lat":  lat,
-			"long": long,
+			"lat":    lat,
+			"long":   long,
+			"status": status,
 		}
 
 		pt, err := client.NewPoint("measurement", tags, fields, time.Now())
