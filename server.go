@@ -141,7 +141,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			"long": long,
 		}
 
-		pt, err := client.NewPoint("cp", tags, fields, time.Now())
+		pt, err := client.NewPoint("measurement", tags, fields, time.Now())
 		if err != nil {
 			log.Fatal(err)
 		}
