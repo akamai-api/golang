@@ -136,6 +136,8 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			"country":     o.Geo.Country,
 			"status":      o.Message.Status,
 			"cacheStatus": o.NetPerf.CacheStatus,
+			"proto":       o.Message.Proto,
+			"protoVer":    o.Message.ProtoVer,
 		}
 		lat, err := strconv.ParseFloat(o.Geo.Lat, 64)
 		long, err := strconv.ParseFloat(o.Geo.Long, 64)
