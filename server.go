@@ -108,19 +108,20 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	c, err := client.NewHTTPClient(client.HTTPConfig{
 		Addr: "http://influxDB:8086",
 	})
+
+	// Create a new point batch
+	bp, err := client.NewBatchPoints(client.BatchPointsConfig{
+		Database: "metrics",
+		//Precision: "s",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	
 	for key, o := range obj {
 		//payload[0].Geo["city"]
 		fmt.Println("Server is:", o.RespHdr.Server, "KEY:", key)
 
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		// Create a new point batch
-		bp, err := client.NewBatchPoints(client.BatchPointsConfig{
-			Database: "metrics",
-			//Precision: "s",
-		})
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -145,11 +146,11 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 		bp.AddPoint(pt)
+	}
 
-		// Write the batch
-		if err := c.Write(bp); err != nil {
-			log.Fatal(err)
-		}
+	// Write the batch
+	if err := c.Write(bp); err != nil {
+		log.Fatal(err)
 	}
 }
 
