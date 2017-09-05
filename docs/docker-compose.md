@@ -26,3 +26,9 @@ cd tests
 ```
 
 Now visit local [grafana](http://localhost:3000) instance and login with admin/admin
+
+
+## How to access to the bash script in certain contaner
+ ```
+ docker run -it server:latest bash
+ ```
