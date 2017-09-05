@@ -110,7 +110,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	})
 	for key, o := range obj {
 		//payload[0].Geo["city"]
-		fmt.Println("City is:", o.RespHdr.Server, "KEY:", key)
+		fmt.Println("Server is:", o.RespHdr.Server, "KEY:", key)
 
 		if err != nil {
 			log.Fatal(err)
@@ -118,7 +118,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 		// Create a new point batch
 		bp, err := client.NewBatchPoints(client.BatchPointsConfig{
-			Database: "myfirstdatabase",
+			Database: "metrics",
 			//Precision: "s",
 		})
 		if err != nil {
@@ -140,7 +140,11 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			"long": long,
 		}
 
+<<<<<<< HEAD
 		pt, err := client.NewPoint("cp", tags, fields, time.Now())
+=======
+		pt, err := client.NewPoint("cp2", tags, fields, time.Now())
+>>>>>>> 8c2391bccd8f5ef7243f0a74969621a924102a9b
 		if err != nil {
 			log.Fatal(err)
 		}
