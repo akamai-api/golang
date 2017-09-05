@@ -117,7 +117,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	for key, o := range obj {
 		//payload[0].Geo["city"]
 		fmt.Println("Server is:", o.RespHdr.Server, "KEY:", key)
@@ -125,11 +125,13 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
+		status, err := strconv.ParseInt(o.Message.Status, 10, 32)
 
 		// Create a point and add to batch
 		tags := map[string]string{
 			"city":    o.Geo.City,
 			"country": o.Geo.Country,
+			"status":  o.Message.Status,
 		}
 		lat, err := strconv.ParseFloat(o.Geo.Lat, 64)
 		long, err := strconv.ParseFloat(o.Geo.Long, 64)
@@ -137,8 +139,9 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 		fields := map[string]interface{}{
-			"lat":  lat,
-			"long": long,
+			"lat":    lat,
+			"long":   long,
+			"status": status,
 		}
 
 		pt, err := client.NewPoint("measurement", tags, fields, time.Now())
