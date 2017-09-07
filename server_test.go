@@ -100,5 +100,5 @@ func TestMultiplePayloads(t *testing.T) {
 		}
 	}
 
-	// TODO test other fields
+
 }
