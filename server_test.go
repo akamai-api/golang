@@ -1,8 +1,8 @@
 package main
 
 import (
-	"testing"
 	"io/ioutil"
+	"testing"
 )
 
 // TestValidPayload tests if we can create a proper object from
@@ -84,13 +84,13 @@ func TestValidPayload(t *testing.T) {
 
 // TestMultiplePayloads tests if a correct number of payload objects are created.
 func TestMultiplePayloads(t *testing.T) {
-	dat, err:= ioutil.ReadFile("tests/payload.json")
+	dat, err := ioutil.ReadFile("tests/payload.json")
 	payloads, err := CreateObjects([]byte(dat))
 	if err != nil {
 		t.Errorf("Error while trying to decode valid JSON payload: %s", err)
 	}
 	// test custom number of payloads in JSON file
-	if len(payloads) != 27 {
+	if len(payloads) != 42 {
 		t.Errorf("Unexpected number of payloads in JSON: Should be 7, is %d", len(payloads))
 	}
 
