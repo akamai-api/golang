@@ -97,7 +97,7 @@ func CreateObjects(jsonFile []byte) (_ []AkamaiPayload, err error) {
 
 // Handle parses the incoming request data
 func Handle(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "OK! I got you Bro! -> ")
+	io.WriteString(w, "OK! Received! -> ")
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -113,14 +113,12 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	// Create a new point batch
 	bp, err := client.NewBatchPoints(client.BatchPointsConfig{
 		Database: "metrics",
-		//Precision: "s",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for key, o := range obj {
-		//payload[0].Geo["city"]
 		fmt.Println("Server is:", o.RespHdr.Server, "KEY:", key)
 
 		if err != nil {
