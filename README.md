@@ -3,16 +3,7 @@
 [![Build Status](https://travis-ci.org/akamai-api/golang.svg?branch=master)](https://travis-ci.org/akamai-api/golang)
 
 
-### Terminology
+### Project which sets up a server that listens to information from Akamai servers. It sends the data to Influxdb and shows the data in Grafana.
 
-#### daemon
-Process that runs in the background and provides a service that is not visible to the user (mail server, ssh server, monitoring).
-
-#### sample data
-Data provided for testing purposes
-
-#### Kafka
-Distributed Message Queue. Can store any type of message.
-
-#### Difference between Unit testing and Integration testing
-?????
+To see how to compile and run the application see our docs:
+https://github.com/akamai-api/golang/tree/master/docs
