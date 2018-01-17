@@ -7,3 +7,9 @@
 
 To see how to compile and run the application see our documentation:
 https://github.com/akamai-api/golang/tree/master/docs
+
+## Dependency Management
+
+This project uses [dep](https://github.com/golang/dep "github.com") for dependency management.
+See the README of dep for installation instructions: [https://github.com/golang/dep#setup](https://github.com/golang/dep#setup "github.com")
+Execute `dep ensure [-update]` for installing/updating dependencies.
