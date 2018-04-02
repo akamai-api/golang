@@ -4,7 +4,7 @@ In this documentation we illustrate how to create a web-host running on the dock
 
 ## Run
 ```
-go run server.go
+go run server.go types.go
 ```
 
 ## Build
@@ -17,18 +17,18 @@ go build
 ./Your-Root-Folder-Name
 ```
 
-## Build Docker
+## Build Docker Image
 
 ```
 docker build -t go-server .
 ```
 
-## Run Docker
+## Run Docker Container
 ```
 docker run --publish 9143:9143 -t  go-server
 ```
 
-## Check if your docker is running correctly
+## Check if your docker Container is running correctly
 ```
 docker ps
 ```
