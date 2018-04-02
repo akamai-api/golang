@@ -20,9 +20,4 @@ server
 .idea/
 
 # vendor
-vendor/**/*
-!vendor/**/
-!vendor/**/*.go
-!vendor/**/*.s
-!vendor/**/LICENSE
-vendor/**/*_test.go
+vendor/
